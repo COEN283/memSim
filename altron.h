@@ -1,7 +1,7 @@
 /****************************************************************************************
 
 	Class Name:		
-		
+	
 
 	Purpose:		
 
@@ -16,65 +16,45 @@
 #define ALTRON_H
 
 //***************************************************************************************
+// Includes
+//***************************************************************************************
+
+#include <string>
+#include <iostream>
+#include <fstream>
+
+#include <queue>
+#include <list>
+
+//***************************************************************************************
 // Class Definition
 //***************************************************************************************
+
+typedef priority_queue<Allocation, list<Allocation> ,SortByAllocation> pqueue;
 
 class Altron
 {
 	private:
 		unsigned int time;
+		ofstream outfile;
+	
+		pqueue allocationQueue; 
+		
 		// LL for elements
 		// Queue for incoming elements		
-
-	public:
-
-	// Altron Constructor
 	
-	// Read into Queue member function
-
-	// Increment time member function
-
-	// Count statistics
+	public:
+	
+		// Altron Constructor / Destructor
+		Altron(string allocationFile, string randomAllocationFile);
+		~Altron();
+	
+		// Read into Queue member function
+		void populateQueue(string filename, pqueue& queue);
+		// Increment time member function
+		void incrementTime();
+		// Count statistics
+		void calculateStats();
 };
 
-/*
-Altron
-{
-	// Create queue of allocation objects
-
-	// Create LL of allocation objects
-
-	// Setup output writer for Stats
-
-	// 
-}
-
-*/
-
-/* populateQueue
-{
-	// Open file pointer
-	ifstream infile(FILENAME.c_str()); 
-	
-	// check for successful open
-	if(!infile)
-	{
-		cerr << "Error in opening input file: " << FILENAME << endl;
-		exit(1);
-	}
-	
-	// read from data file
-	// insert into queue
-
-	// close infile
-	infile.close();
-}
-*/
-
-/* increment time
-{
-	// Read 
-
-}
-*/
 #endif
