@@ -22,15 +22,20 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <cstring>
 
 #include <queue>
 #include <list>
+#include <vector>
+
+using namespace std;
 
 //***************************************************************************************
 // Class Definition
 //***************************************************************************************
 
-typedef priority_queue<Allocation, list<Allocation> ,SortByAllocation> pqueue;
+typedef priority_queue<Allocation*, vector<Allocation*> ,SortByAllocation> pqueue;
 
 class Altron
 {

@@ -16,6 +16,8 @@
 // Global Variable Declarations
 //***************************************************************************************
 const char DELIMITERS[] = " ,";
+const string FILENAME = "stats.txt";
+const int BUFFER_SIZE = 30;
 
 //***************************************************************************************
 // Constructors and Destructors
@@ -43,10 +45,8 @@ Altron::Altron(string allocationFile, string randomAllocationFile)
 	// setup memory array	
 }
 
-Altron::~Altron
+Altron::~Altron()
 {
-	
-
 	// close outfile
 	outfile.close();
 }
@@ -70,7 +70,7 @@ Altron::~Altron
 // Parse file
 void Altron::populateQueue(string filename, pqueue& queue)
 {
-	char buffer[30];
+	char buffer[BUFFER_SIZE];
 
 	int allocationTime;
 	int allocationSize;
@@ -86,16 +86,16 @@ void Altron::populateQueue(string filename, pqueue& queue)
 		exit(1);
 	}
 	
-	while( getline(infile, buffer) )
+	while( infile.getline(buffer,BUFFER_SIZE) )
 	{
-		allocationTime   = strtok(buffer, DELIMITERS);
-		allocationSize   = strtok(buffer, NULL);
-		deallocationTime = strtok(buffer, NULL);
+		allocationTime   = atoi(strtok(buffer, DELIMITERS));
+		allocationSize   = atoi(strtok(NULL  , DELIMITERS));
+		deallocationTime = atoi(strtok(NULL  , DELIMITERS));
 
-		Allocation tempAllocation = 
+		Allocation* tempAllocation = 
 				new Allocation(allocationTime, allocationSize, deallocationTime);
 
-		queue.push(tempAllocatoin);
+		queue.push(tempAllocation);
 	}
 
 	// close infile
