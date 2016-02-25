@@ -22,15 +22,16 @@
 class Allocation
 {
 	private:
-		int allocationTime;
-		int allocationSize;
-		int deallocationTime;
+		unsigned int allocationTime;
+		unsigned int allocationSize;
+		unsigned int deallocationTime;
+		// Todo: Add way to make deallocation time = lifetime + allocation time
 
 	public:
-		Allocation(int start, int size, int finish);
-		int getStart();
-		int getSize();
-		int getFinish();
+		Allocation(unsigned int start, unsigned int size, unsigned int finish);
+		unsigned int getStart();
+		unsigned int getSize();
+		unsigned int getFinish();
 
 		friend class SortByAllocation;
 		friend class SortBySize;

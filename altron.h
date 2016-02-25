@@ -35,18 +35,18 @@ using namespace std;
 // Class Definition
 //***************************************************************************************
 
-typedef priority_queue<Allocation*, vector<Allocation*> ,SortByAllocation> pqueue;
+typedef priority_queue<Allocation*, vector<Allocation*> ,SortByAllocation> allocQ;
+typedef priority_queue<Allocation*, vector<Allocation*> ,SortByDeallocation> deallocQ;
 
 class Altron
 {
 	private:
 		unsigned int time;
 		ofstream outfile;
-	
-		pqueue allocationQueue; 
-		
-		// LL for elements
-		// Queue for incoming elements		
+
+		// allocation and deallocation queues	
+		allocQ allocationQueue; 
+		deallocQ deallocationQueue;
 	
 	public:
 	
@@ -54,8 +54,10 @@ class Altron
 		Altron(string allocationFile, string randomAllocationFile);
 		~Altron();
 	
+		// runSimulation
+		void runSimulation();
 		// Read into Queue member function
-		void populateQueue(string filename, pqueue& queue);
+		void populateQueue(string filename, allocQ& queue);
 		// Increment time member function
 		void incrementTime();
 		// Count statistics

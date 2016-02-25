@@ -55,20 +55,54 @@ Altron::~Altron()
 // Member Function Definitions
 //***************************************************************************************
 
-/* increment time
+// increment time
+void Altron::incrementTime()
 {
-	// time++	
+	time++;	
 
-	// Read deallocation linked list
+	vector <Allocation*> allocationHold;
+
+	// Read deallocation Queue
 	// deallocate what isn't needed anymore
+	while( !deallocationQueue.empty() && 
+				deallocationQueue.top()->getFinish() <= time )
+	{
+		// if successfully deallocated
+		//deallocationQueue.top()->deallocate();
+		{
+			delete(deallocationQueue.top());
+
+			deallocationQueue.pop();
+		}
+	}
 	
 	// Read allocation queue
 	// allocate what needs to be allocated
+	while( !allocationQueue.empty() &&
+			 allocationQueue.top()->getStart() <= time )
+	{
+		// if successfully allocated
+		//if( allocationQueue.top()->allocate() )
+		//{
+			deallocationQueue.push(allocationQueue.top());
+
+			allocationQueue.pop();
+		//}
+	
+		/*else
+		{
+			// TODO: add queue to hold things that cannot be allocated
+			deallocationQueue.top();
+		}*/
+
+	}
+
+	//calculateStats();
 }
-*/
+
 
 // Parse file
-void Altron::populateQueue(string filename, pqueue& queue)
+void Altron::populateQueue(string filename, allocQ& queue)
 {
 	char buffer[BUFFER_SIZE];
 
@@ -102,3 +136,10 @@ void Altron::populateQueue(string filename, pqueue& queue)
 	infile.close();
 }
 
+void Altron::runSimulation()
+{
+	while(!allocationQueue.empty() && !deallocationQueue.empty())
+	{
+		incrementTime();
+	}
+}
