@@ -9,44 +9,17 @@
 
 ****************************************************************************************/
 
-#include "allocation.h"
+#include "bestFit.h"
 
 //***************************************************************************************
 // Global Variable Declarations
 //***************************************************************************************
-const unsigned int MEM_SIZE = 100; 
 
 //***************************************************************************************
 // Constructors and Destructors
 //***************************************************************************************
-Allocation::Allocation(unsigned int start, unsigned int size, unsigned int finish)
-	:allocationTime(start), allocationSize(size), deallocationTime(finish)
-{}
-
-Allocation::~Allocation()
-{}
 
 //***************************************************************************************
 // Member Function Definitions
 //***************************************************************************************
-unsigned int Allocation::getStart()
-{
-	return allocationTime;
-}
-
-unsigned int Allocation::getSize()
-{
-	return allocationSize;
-}
-
-void  Allocation::setFinish(int startTime)
-{
-	deallocationTime += startTime;
-}
-
-unsigned int Allocation::getFinish()
-{
-	return deallocationTime;
-}
-
 

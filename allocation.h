@@ -28,6 +28,8 @@ class Allocation
 
 	public:
 		Allocation(unsigned int start, unsigned int size, unsigned int finish);
+		virtual ~Allocation();
+
 		unsigned int getStart();
 		unsigned int getSize();
 		void setFinish(int startTime);
