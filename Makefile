@@ -1,12 +1,12 @@
 CC=gcc
 CPC=g++
 
-CFLAGS=-g -Wall -Wextra -std=c++11 -pthread -lrt -Wl,--no-as-needed
+CFLAGS=-g -Wall -Wextra -std=c++11 
 
 ALLOCATION=allocation.cpp allocation.h
 ALTRON=altron.cpp altron.h
 
-memSim: allocation.o altron.o 
+all: allocation.o altron.o 
 	$(CPC) $(CFLAGS) memSim.cpp allocation.o altron.o -o memSim
 
 allocation.o: $(ALLOCATION)
