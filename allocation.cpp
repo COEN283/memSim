@@ -35,6 +35,11 @@ unsigned int Allocation::getSize()
 	return allocationSize;
 }
 
+void  Allocation::setFinish(int startTime)
+{
+	deallocationTime += startTime;
+}
+
 unsigned int Allocation::getFinish()
 {
 	return deallocationTime;

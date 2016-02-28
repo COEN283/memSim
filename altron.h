@@ -35,9 +35,11 @@ using namespace std;
 // Class Definition
 //***************************************************************************************
 
+
 typedef priority_queue<Allocation*, vector<Allocation*> ,SortByAllocation> allocQ;
 typedef priority_queue<Allocation*, vector<Allocation*> ,SortByDeallocation> deallocQ;
 
+template <typename A>
 class Altron
 {
 	private:

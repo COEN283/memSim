@@ -23,7 +23,8 @@ const int BUFFER_SIZE = 30;
 // Constructors and Destructors
 //***************************************************************************************
 
-Altron::Altron(string allocationFile, string randomAllocationFile)
+template <typename A>
+Altron<A>::Altron(string allocationFile, string randomAllocationFile)
 {
 	// Setup output writer for Stats
 	outfile.open(FILENAME.c_str()); 
@@ -45,7 +46,8 @@ Altron::Altron(string allocationFile, string randomAllocationFile)
 	// setup memory array	
 }
 
-Altron::~Altron()
+template <typename A>
+Altron<A>::~Altron()
 {
 	// close outfile
 	outfile.close();
@@ -56,24 +58,25 @@ Altron::~Altron()
 //***************************************************************************************
 
 // increment time
-void Altron::incrementTime()
+template <typename A>
+void Altron<A>::incrementTime()
 {
 	time++;	
 
-	vector <Allocation*> allocationHold;
+	vector <A*> allocationHold;
 
 	// Read deallocation Queue
 	// deallocate what isn't needed anymore
 	while( !deallocationQueue.empty() && 
 				deallocationQueue.top()->getFinish() <= time )
 	{
-		// if successfully deallocated
+		// deallocate the object
 		//deallocationQueue.top()->deallocate();
-		{
-			delete(deallocationQueue.top());
+		
+		delete(deallocationQueue.top());
 
-			deallocationQueue.pop();
-		}
+		deallocationQueue.pop();
+		
 	}
 	
 	// Read allocation queue
@@ -89,12 +92,6 @@ void Altron::incrementTime()
 			allocationQueue.pop();
 		//}
 	
-		/*else
-		{
-			// TODO: add queue to hold things that cannot be allocated
-			deallocationQueue.top();
-		}*/
-
 	}
 
 	//calculateStats();
@@ -102,7 +99,8 @@ void Altron::incrementTime()
 
 
 // Parse file
-void Altron::populateQueue(string filename, allocQ& queue)
+template <typename A>
+void Altron<A>::populateQueue(string filename, allocQ& queue)
 {
 	char buffer[BUFFER_SIZE];
 
@@ -126,8 +124,8 @@ void Altron::populateQueue(string filename, allocQ& queue)
 		allocationSize   = atoi(strtok(NULL  , DELIMITERS));
 		deallocationTime = atoi(strtok(NULL  , DELIMITERS));
 
-		Allocation* tempAllocation = 
-				new Allocation(allocationTime, allocationSize, deallocationTime);
+		A* tempAllocation = 
+				new A(allocationTime, allocationSize, deallocationTime);
 
 		queue.push(tempAllocation);
 	}
@@ -136,7 +134,8 @@ void Altron::populateQueue(string filename, allocQ& queue)
 	infile.close();
 }
 
-void Altron::runSimulation()
+template <typename A>
+void Altron<A>::runSimulation()
 {
 	while(!allocationQueue.empty() && !deallocationQueue.empty())
 	{

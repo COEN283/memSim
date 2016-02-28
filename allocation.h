@@ -31,6 +31,7 @@ class Allocation
 		Allocation(unsigned int start, unsigned int size, unsigned int finish);
 		unsigned int getStart();
 		unsigned int getSize();
+		void setFinish(int startTime);
 		unsigned int getFinish();
 
 		friend class SortByAllocation;
