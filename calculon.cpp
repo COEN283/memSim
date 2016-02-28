@@ -24,7 +24,7 @@ const int BUFFER_SIZE = 30;
 //***************************************************************************************
 
 template <typename A>
-Altron<A>::Altron(string allocationFile, string randomAllocationFile)
+Calculon<A>::Calculon(string allocationFile, string randomAllocationFile)
 {
 	// Setup output writer for Stats
 	outfile.open(FILENAME.c_str()); 
@@ -47,7 +47,7 @@ Altron<A>::Altron(string allocationFile, string randomAllocationFile)
 }
 
 template <typename A>
-Altron<A>::~Altron()
+Calculon<A>::~Calculon()
 {
 	// close outfile
 	outfile.close();
@@ -59,7 +59,7 @@ Altron<A>::~Altron()
 
 // increment time
 template <typename A>
-void Altron<A>::incrementTime()
+void Calculon<A>::incrementTime()
 {
 	time++;	
 
@@ -100,7 +100,7 @@ void Altron<A>::incrementTime()
 
 // Parse file
 template <typename A>
-void Altron<A>::populateQueue(string filename, allocQ& queue)
+void Calculon<A>::populateQueue(string filename, allocQ& queue)
 {
 	char buffer[BUFFER_SIZE];
 
@@ -135,7 +135,7 @@ void Altron<A>::populateQueue(string filename, allocQ& queue)
 }
 
 template <typename A>
-void Altron<A>::runSimulation()
+void Calculon<A>::runSimulation()
 {
 	while(!allocationQueue.empty() && !deallocationQueue.empty())
 	{

@@ -40,7 +40,7 @@ typedef priority_queue<Allocation*, vector<Allocation*> ,SortByAllocation> alloc
 typedef priority_queue<Allocation*, vector<Allocation*> ,SortByDeallocation> deallocQ;
 
 template <typename A>
-class Altron
+class Calculon
 {
 	private:
 		unsigned int time;
@@ -52,9 +52,9 @@ class Altron
 	
 	public:
 	
-		// Altron Constructor / Destructor
-		Altron(string allocationFile, string randomAllocationFile);
-		~Altron();
+		// Calculon Constructor / Destructor
+		Calculon(string allocationFile, string randomAllocationFile);
+		~Calculon();
 	
 		// runSimulation
 		void runSimulation();

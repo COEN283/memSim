@@ -25,7 +25,6 @@ class Allocation
 		unsigned int allocationTime;
 		unsigned int allocationSize;
 		unsigned int deallocationTime;
-		// Todo: Add way to make deallocation time = lifetime + allocation time
 
 	public:
 		Allocation(unsigned int start, unsigned int size, unsigned int finish);
@@ -33,6 +32,9 @@ class Allocation
 		unsigned int getSize();
 		void setFinish(int startTime);
 		unsigned int getFinish();
+
+		virtual bool allocate() const = 0;
+		virtual bool deallocate() const = 0;
 
 		friend class SortByAllocation;
 		friend class SortBySize;
