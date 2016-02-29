@@ -8,10 +8,10 @@
  */
 //This program is created for COEN283 project.
 
-#include <firstFit.h>
+#include "firstFit.h"
 
 //constructor
-FirstFit::FirstFit(unsigned int start, unsigned int size, unsigned int finish)
+FirstFit::FirstFit(int start, int size, int finish)
 : Allocation(start, size, finish) {}
 
 //destructor
