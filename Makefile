@@ -4,16 +4,19 @@ CPC=g++
 CFLAGS=-g -Wall -Wextra -std=c++11 
 
 ALLOCATION=allocation.cpp allocation.h
-calculon=calculon.cpp calculon.h
+CALCULON=calculon.cpp calculon.h
 
-all: allocation.o calculon.o 
-	$(CPC) $(CFLAGS) memSim.cpp allocation.o calculon.o -o memSim
+all: allocation.o calculon.o bestFit.o 
+	$(CPC) $(CFLAGS) memSim.cpp allocation.o calculon.o bestFit.o -o memSim
 
 allocation.o: $(ALLOCATION)
 	$(CPC) $(CFLAGS) -c allocation.cpp  -o allocation.o 
 
-calculon.o: $(ALLOCATION) $(calculon)
+calculon.o: $(ALLOCATION) $(CALCULON)
 	$(CPC) $(CFLAGS) -c calculon.cpp  -o calculon.o 
+
+bestFit.o: $(ALLOCATION) $(BESTFIT)
+	$(CPC) $(CFLAGS) -c bestFit.cpp  -o bestFit.o 
 
 
 clean:

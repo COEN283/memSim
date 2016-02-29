@@ -15,7 +15,7 @@
 #ifndef BESTFIT_H
 #define BESTFIT_H
 
-#include <iostram>
+#include <iostream>
 #include "allocation.h"
 
 using namespace std;
@@ -24,15 +24,21 @@ using namespace std;
 // Class Definition
 //***************************************************************************************
 
-class 
+class bestFit : public Allocation
 {
 	private:
-		// memory		
+		// Memory Array		
+		static bool memory[MEM_SIZE];
+		int memPos;
 
 	public:
 
+		bestFit(unsigned int start, unsigned int size, unsigned int finish);
+		~bestFit();
 		bool allocate();
 		bool deallocate();
 };
+
+bool bestFit::memory[MEM_SIZE] = {false};
 
 #endif
