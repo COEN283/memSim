@@ -21,7 +21,10 @@ private:
 	static unsigned int memArr[MEM_SIZE] = {0};
 
 	//keeps track of allocated location in memory
-	unsigned int memLoc = 0;
+	int memLoc = 0;
+
+	//keeps track of amount of allocated memory
+	static int allocatedMem = 0;
 
 public:
 	//constructor
@@ -36,8 +39,11 @@ public:
 	//deallocation
 	bool deallocate();
 
-	//collected fragmentation stats
+	//get number of fragments
 	int getFragments();
+
+	//get amount of free memory
+	int getFreeMem();
 
 };
 

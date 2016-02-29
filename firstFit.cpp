@@ -42,6 +42,9 @@ bool FirstFit::allocate()
 			for(int j = memLoc; j <= allocationSize; j++)
 				memArr[j] = 1;
 
+			//update allocatedMem
+			allocatedMem += allocationSize;
+
 			return true;
 		}
 
@@ -88,4 +91,10 @@ int FirstFit::getFragments()
 	return count;
 
 }//ends getFragments()
+
+int FirstFit::getFreeMem()
+{
+	return MEM_SIZE - allocatedMem;
+
+}//ends getFreeMem
 

@@ -43,6 +43,7 @@ class Allocation
 		virtual bool allocate() const = 0;
 		virtual bool deallocate() const = 0;
 		virtual int getFragments() const = 0;
+		virtual int getFreeMem() const = 0;
 
 		friend class SortByAllocation;
 		friend class SortBySize;
