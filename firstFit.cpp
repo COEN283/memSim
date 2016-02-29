@@ -66,3 +66,26 @@ bool FirstFit::deallocate()
 	return true;
 
 }//ends deallocate()
+
+int FirstFit::getFragments()
+{
+	//keeps track of number of memroy fragments
+	int count = 0;
+
+	//loop through memory
+	for(int i = 0; i < allocationSize; i++)
+	{
+		//if memory slot is empty and index is 0
+		if(memArr[i] == 0 && i == 0)
+			count++; //increment counter
+
+		//else if the memory slot is empty and the previous slot is occupied
+		else if(memArr[i] == 0 && memArr[i - 1] == 1)
+			count++; //increment counter
+
+	}//ends for loop
+
+	return count;
+
+}//ends getFragments()
+

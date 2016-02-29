@@ -36,6 +36,9 @@ public:
 	//deallocation
 	bool deallocate();
 
+	//collected fragmentation stats
+	int getFragments();
+
 };
 
 #endif /* FIRSTFIT_H_ */
