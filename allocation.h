@@ -16,12 +16,17 @@
 #define ALLOCATION_H
 
 //***************************************************************************************
+// Global Variable Declarations
+//***************************************************************************************
+const unsigned int MEM_SIZE = 100; 
+
+//***************************************************************************************
 // Class Definition
 //***************************************************************************************
 
 class Allocation
 {
-	private:
+	protected:
 		unsigned int allocationTime;
 		unsigned int allocationSize;
 		unsigned int deallocationTime;
