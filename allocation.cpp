@@ -14,7 +14,7 @@
 //***************************************************************************************
 // Constructors and Destructors
 //***************************************************************************************
-Allocation::Allocation(unsigned int start, unsigned int size, unsigned int finish)
+Allocation::Allocation(int start, int size, int finish)
 	:allocationTime(start), allocationSize(size), deallocationTime(finish)
 {}
 
@@ -24,12 +24,12 @@ Allocation::~Allocation()
 //***************************************************************************************
 // Member Function Definitions
 //***************************************************************************************
-unsigned int Allocation::getStart()
+int Allocation::getStart()
 {
 	return allocationTime;
 }
 
-unsigned int Allocation::getSize()
+int Allocation::getSize()
 {
 	return allocationSize;
 }
@@ -39,7 +39,7 @@ void  Allocation::setFinish(int startTime)
 	deallocationTime += startTime;
 }
 
-unsigned int Allocation::getFinish()
+int Allocation::getFinish()
 {
 	return deallocationTime;
 }

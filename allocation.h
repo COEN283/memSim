@@ -18,7 +18,7 @@
 //***************************************************************************************
 // Global Variable Declarations
 //***************************************************************************************
-const unsigned int MEM_SIZE = 100; 
+const int MEM_SIZE = 100; 
 
 //***************************************************************************************
 // Class Definition
@@ -27,18 +27,18 @@ const unsigned int MEM_SIZE = 100;
 class Allocation
 {
 	protected:
-		unsigned int allocationTime;
-		unsigned int allocationSize;
-		unsigned int deallocationTime;
+		int allocationTime;
+		int allocationSize;
+		int deallocationTime;
 
 	public:
-		Allocation(unsigned int start, unsigned int size, unsigned int finish);
+		Allocation(int start, int size, int finish);
 		virtual ~Allocation();
 
-		unsigned int getStart();
-		unsigned int getSize();
+		int getStart();
+		int getSize();
 		void setFinish(int startTime);
-		unsigned int getFinish();
+		int getFinish();
 
 		virtual bool allocate() const = 0;
 		virtual bool deallocate() const = 0;
