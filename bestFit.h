@@ -29,17 +29,20 @@ class BestFit : public Allocation
 	private:
 		// Memory Array		
 		static bool memory[MEM_SIZE];
+        static int amountAllocated;
 		int memPos;
 
 	public:
 
-		BestFit(unsigned int start, unsigned int size, unsigned int finish);
+		BestFit(int start, int size, int finish);
 		~BestFit();
 		bool allocate();
         bool deallocate();
 		int getFragments();
+        int getFreeMem();
 };
 
 bool BestFit::memory[MEM_SIZE] = {false};
+int BestFit::amountAllocated = 0;
 
 #endif

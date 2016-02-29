@@ -18,7 +18,7 @@
 //***************************************************************************************
 // Constructors and Destructors
 //***************************************************************************************
-BestFit::BestFit(unsigned int start, unsigned int size, unsigned int finish):
+BestFit::BestFit(int start, int size, int finish):
 Allocation(start, size, finish)
 {}
 
@@ -32,11 +32,11 @@ bool BestFit::allocate()
 {
 	int pos;
 	int bestPos = -1;
-	unsigned int bestFreeSize = MEM_SIZE;
-	unsigned int freeSize = 0;
+	int bestFreeSize = MEM_SIZE;
+	int freeSize = 0;
 
 	// loop through memory
-	for(unsigned int i = 0; i < MEM_SIZE; i++)
+	for(int i = 0; i < MEM_SIZE; i++)
 	{
 		// if memory is empty
 		if(!memory[i])
@@ -81,11 +81,13 @@ bool BestFit::allocate()
 		memPos = bestPos;
 
 		// mark memory as occupied
-		for(unsigned int i = bestPos; i < allocationSize; i++)
+		for(int i = bestPos; i < allocationSize; i++)
 		{
 			memory[i] = true;
 		}
 
+		amountAllocated += allocationSize;
+		
 		// return successfully allocated memory
 		return true;
 	}
@@ -98,8 +100,10 @@ bool BestFit::allocate()
 
 bool BestFit::deallocate()
 {
-	for(unsigned int i = memPos; i < allocationSize; i++)
+	for(int i = memPos; i < allocationSize; i++)
 		memory[i] = false;
+
+	amountAllocated -= allocationSize;
 
 	return true;
 }
@@ -109,7 +113,7 @@ int BestFit::getFragments()
 	int numFragments = 0;
 
 	// loop through array
-	for(unsigned int i = 0; i < MEM_SIZE; i++)
+	for(int i = 0; i < MEM_SIZE; i++)
 	{
 		// if memory slot is empty
 		if(!memory[i])
@@ -135,4 +139,9 @@ int BestFit::getFragments()
 
 	// return fragment
 	return numFragments;
+}
+
+int BestFit::getFreeMem()
+{
+	return MEM_SIZE - amountAllocated;
 }
