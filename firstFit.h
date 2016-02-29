@@ -46,6 +46,7 @@ public:
 
 };
 
+//static variable initialization
 int FirstFit::memArr[MEM_SIZE] = {0};
 int FirstFit::allocatedMem = 0;
 

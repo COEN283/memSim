@@ -53,7 +53,6 @@ bool FirstFit::allocate()
 	//if no memory chunk is big enough to fit the allocation object
 	return false;
 
-
 }//ends allocate()
 
 bool FirstFit::deallocate()
