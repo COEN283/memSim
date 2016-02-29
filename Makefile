@@ -5,6 +5,7 @@ CFLAGS=-g -Wall -Wextra -std=c++11
 
 ALLOCATION=allocation.cpp allocation.h
 CALCULON=calculon.cpp calculon.h
+BESTFIT=bestFit.cpp bestFit.h
 
 all: allocation.o calculon.o bestFit.o 
 	$(CPC) $(CFLAGS) memSim.cpp allocation.o calculon.o bestFit.o -o memSim

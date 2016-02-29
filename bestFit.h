@@ -24,7 +24,7 @@ using namespace std;
 // Class Definition
 //***************************************************************************************
 
-class bestFit : public Allocation
+class BestFit : public Allocation
 {
 	private:
 		// Memory Array		
@@ -33,12 +33,13 @@ class bestFit : public Allocation
 
 	public:
 
-		bestFit(unsigned int start, unsigned int size, unsigned int finish);
-		~bestFit();
+		BestFit(unsigned int start, unsigned int size, unsigned int finish);
+		~BestFit();
 		bool allocate();
-		bool deallocate();
+        bool deallocate();
+		int getFragments();
 };
 
-bool bestFit::memory[MEM_SIZE] = {false};
+bool BestFit::memory[MEM_SIZE] = {false};
 
 #endif

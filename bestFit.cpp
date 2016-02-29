@@ -18,17 +18,17 @@
 //***************************************************************************************
 // Constructors and Destructors
 //***************************************************************************************
-bestFit::bestFit(unsigned int start, unsigned int size, unsigned int finish):
+BestFit::BestFit(unsigned int start, unsigned int size, unsigned int finish):
 Allocation(start, size, finish)
 {}
 
-bestFit::~bestFit()
+BestFit::~BestFit()
 {}
 
 //***************************************************************************************
 // Member Function Definitions
 //***************************************************************************************
-bool bestFit::allocate()
+bool BestFit::allocate()
 {
 	int pos;
 	int bestPos = -1;
@@ -94,4 +94,45 @@ bool bestFit::allocate()
 	{
 		return false;
 	}
+}
+
+bool BestFit::deallocate()
+{
+	for(unsigned int i = memPos; i < allocationSize; i++)
+		memory[i] = false;
+
+	return true;
+}
+
+int BestFit::getFragments()
+{
+	int numFragments = 0;
+
+	// loop through array
+	for(unsigned int i = 0; i < MEM_SIZE; i++)
+	{
+		// if memory slot is empty
+		if(!memory[i])
+		{
+			// check if i == 0
+			if(!i)
+			{
+				// if i == 0, we started off with empty fragment
+				// increment fragment
+				numFragments++;
+			}
+			else
+			{
+				// if i != 0, check if previous memory slot is free
+				if(memory[i - 1])
+				{
+					// if previous slot is occupied, begin new fragment
+					numFragments++;
+				}
+			}
+		}
+	}
+
+	// return fragment
+	return numFragments;
 }
