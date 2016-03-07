@@ -8,9 +8,11 @@ CALCULON=calculon.cpp calculon.h
 BESTFIT=bestFit.cpp bestFit.h
 FIRSTFIT=firstFit.cpp firstFit.h
 WORSTFIT=worstFit.cpp worstFit.h
+SIMPLE=simpleSegregated.cpp simpleSegregated.h
+SEGREGATED=segregated.cpp segregated.h
 
-all: allocation.o calculon.o bestFit.o firstFit.o worstFit.o 
-	$(CPC) $(CFLAGS) memSim.cpp allocation.o calculon.o bestFit.o -o memSim
+all: allocation.o calculon.o bestFit.o firstFit.o worstFit.o simple.o segregated.o 
+	$(CPC) $(CFLAGS) memSim.cpp allocation.o calculon.o bestFit.o firstFit.o worstFit.o simple.o segregated.o -o memSim
 
 allocation.o: $(ALLOCATION)
 	$(CPC) $(CFLAGS) -c allocation.cpp  -o allocation.o 
@@ -27,6 +29,11 @@ firstFit.o: $(ALLOCATION) $(BESTFIT)
 worstFit.o: $(ALLOCATION) $(BESTFIT)
 	$(CPC) $(CFLAGS) -c worstFit.cpp  -o worstFit.o 
 
+simple.o: $(ALLOCATION) $(SIMPLE)
+	$(CPC) $(CFLAGS) -c simpleSegregated.cpp  -o simple.o 
+
+segregated.o: $(ALLOCATION) $(SEGREGATED)
+	$(CPC) $(CFLAGS) -c segregated.cpp  -o segregated.o 
 
 clean:
 	rm *.o &> /dev/null; rm memSim &> /dev/null
