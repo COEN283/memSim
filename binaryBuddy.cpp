@@ -14,8 +14,6 @@
 //***************************************************************************************
 // Global Variable Declarations
 //***************************************************************************************
-
-const int CLASS_SIZE = 2;
 const int MEM_MAX = 4;
 
 #include "binaryBuddy.h"
@@ -38,15 +36,18 @@ bool BinaryBuddy::allocate()
 {
 	int index = ceil(log2(allocationSize));
 
-	if(!(index % CLASS_SIZE))
-		index += (CLASS_SIZE - (index % CLASS_SIZE));
-
-	for(int i = index; i < MEM_MAX; i += CLASS_SIZE)
+	for(int i = index; i < MEM_MAX; i++)
 	{
 		if(mem[i] > 0)
 		{
 			memIndex = i;
-			mem[i]--;
+            
+            for(int j = i + 1; j < MEM_MAX; j++)
+                mem[j]--;
+
+            for(int j = i; j > 0; j--)
+                mem[j] -= pow(2.0, i - j);
+
 			freeSpace = pow(2.0, static_cast<double>(i)) - allocationSize;
 			if(!freeSpace)
 				numFragments++;
@@ -61,7 +62,11 @@ bool BinaryBuddy::allocate()
 
 bool BinaryBuddy::deallocate()
 {
-	mem[memIndex]++;
+    for(int j = memIndex + 1; j < MEM_MAX; j++)
+        mem[j]++;
+
+    for(int j = memIndex; j > 0; j--)
+        mem[j] += pow(2.0, memIndex - j);
 
 	if(!freeSpace)
 		numFragments--;
