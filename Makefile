@@ -11,9 +11,10 @@ WORSTFIT=worstFit.cpp worstFit.h
 SIMPLE=simpleSegregated.cpp simpleSegregated.h
 SEGREGATED=segregated.cpp segregated.h
 BINARY=binaryBuddy.cpp binaryBuddy.h
+DOUBLE=doubleBuddy.cpp doubleBuddy.h
 
-all: allocation.o calculon.o bestFit.o firstFit.o worstFit.o simple.o segregated.o binary.o 
-	$(CPC) $(CFLAGS) memSim.cpp allocation.o calculon.o bestFit.o firstFit.o worstFit.o simple.o segregated.o binary.o -o memSim
+all: allocation.o calculon.o bestFit.o firstFit.o worstFit.o simple.o segregated.o binary.o double.o
+	$(CPC) $(CFLAGS) memSim.cpp allocation.o calculon.o bestFit.o firstFit.o worstFit.o simple.o segregated.o binary.o double.o -o memSim
 
 allocation.o: $(ALLOCATION)
 	$(CPC) $(CFLAGS) -c allocation.cpp  -o allocation.o 
@@ -38,6 +39,9 @@ segregated.o: $(ALLOCATION) $(SEGREGATED)
 
 binary.o: $(ALLOCATION) $(BINARY)
 	$(CPC) $(CFLAGS) -c binaryBuddy.cpp  -o binary.o 
+
+double.o: $(ALLOCATION) $(DOUBLE)
+	$(CPC) $(CFLAGS) -c doubleBuddy.cpp  -o double.o 
 
 clean:
 	rm *.o &> /dev/null; rm memSim &> /dev/null
