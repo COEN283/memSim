@@ -10,11 +10,15 @@
 ****************************************************************************************/
 
 #include <cmath>
-#include "simpleSegregated.h"
 
 //***************************************************************************************
 // Global Variable Declarations
 //***************************************************************************************
+
+const int CLASS_SIZE = 2;
+const int MEM_MAX = 4;
+
+#include "simpleSegregated.h"
 
 //***************************************************************************************
 // Constructors and Destructors
@@ -34,16 +38,22 @@ bool SimpleSegregated::allocate()
 {
 	int index = ceil(log2(allocationSize));
 
-	if(mem[index] > 0)
-	{
-		memIndex = index;
-		mem[index]--;
-		freeSpace = pow(2.0, static_cast<double>(index)) - allocationSize;
-		if(!freeSpace)
-			numFragments++;
+	if(!(index % CLASS_SIZE))
+		index += (CLASS_SIZE - (index % CLASS_SIZE));
 
-		freeMem -= allocationSize;
-		return true;
+	for(int i = index; i < MEM_MAX; i += CLASS_SIZE)
+	{
+		if(mem[i] > 0)
+		{
+			memIndex = i;
+			mem[i]--;
+			freeSpace = pow(2.0, static_cast<double>(i)) - allocationSize;
+			if(!freeSpace)
+				numFragments++;
+	
+			freeMem -= allocationSize;
+			return true;
+		}
 	}
 
 	return false;

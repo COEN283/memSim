@@ -27,7 +27,7 @@ using namespace std;
 class SimpleSegregated : public Allocation 
 {
 	private:
-		static int mem[];
+		static int mem[MEM_MAX];
 		static int numFragments;
 		static int freeMem;
 
@@ -44,7 +44,7 @@ class SimpleSegregated : public Allocation
 
 };
 
-int SimpleSegregated::mem[] = {8,4,2,1};
+int SimpleSegregated::mem[MEM_MAX] = {8,4,2,1};
 int SimpleSegregated::numFragments = 0;
 int SimpleSegregated::freeMem = 0;
 
