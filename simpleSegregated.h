@@ -24,6 +24,9 @@ using namespace std;
 // Class Definition
 //***************************************************************************************
 
+const int CLASS_SIZE = 2;
+const int MEM_MAX = 4;
+
 class SimpleSegregated : public Allocation 
 {
 	private:
@@ -43,9 +46,5 @@ class SimpleSegregated : public Allocation
 		int getFreeMem();
 
 };
-
-int SimpleSegregated::mem[MEM_MAX] = {8,4,2,1};
-int SimpleSegregated::numFragments = 0;
-int SimpleSegregated::freeMem = 0;
 
 #endif

@@ -10,6 +10,10 @@
 
 #include "firstFit.h"
 
+//static variable initialization
+int FirstFit::memArr[MEM_SIZE] = {0};
+int FirstFit::allocatedMem = 0;
+
 //constructor
 FirstFit::FirstFit(int start, int size, int finish)
 : Allocation(start, size, finish) {}

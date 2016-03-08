@@ -20,6 +20,8 @@
 
 using namespace std;
 
+const int MEM_MAX_SEG = 4;
+
 //***************************************************************************************
 // Class Definition
 //***************************************************************************************
@@ -27,7 +29,7 @@ using namespace std;
 class Segregated : public Allocation 
 {
 	private:
-		static int mem[MEM_MAX];
+		static int mem[MEM_MAX_SEG];
 		static int numFragments;
 		static int freeMem;
 
@@ -43,9 +45,5 @@ class Segregated : public Allocation
 		int getFreeMem();
 
 };
-
-int Segregated::mem[MEM_MAX] = {8,4,2,1};
-int Segregated::numFragments = 0;
-int Segregated::freeMem = 0;
 
 #endif

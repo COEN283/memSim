@@ -24,6 +24,8 @@ using namespace std;
 // Class Definition
 //***************************************************************************************
 
+const int MEM_MAX = 4;
+
 class DoubleBuddy : public Allocation 
 {
 	private:
@@ -47,12 +49,5 @@ class DoubleBuddy : public Allocation
 		int getFreeMem();
 
 };
-
-int DoubleBuddy::memRight[MEM_MAX] = {8,4,2,1};
-int DoubleBuddy::memLeft[MEM_MAX] = {8,4,2,1};
-int DoubleBuddy::numFragments = 0;
-int DoubleBuddy::freeMem = 0;
-double DoubleBuddy::rightBase = 2.0;
-double DoubleBuddy::leftBase = 3.0;
 
 #endif

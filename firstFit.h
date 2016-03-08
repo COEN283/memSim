@@ -8,10 +8,10 @@
  */
 //This program is created for COEN283 project.
 
-#include "allocation.h"
-
 #ifndef FIRSTFIT_H_
 #define FIRSTFIT_H_
+
+#include "allocation.h"
 
 class FirstFit: public Allocation
 {
@@ -46,8 +46,5 @@ public:
 
 };
 
-//static variable initialization
-int FirstFit::memArr[MEM_SIZE] = {0};
-int FirstFit::allocatedMem = 0;
 
 #endif /* FIRSTFIT_H_ */

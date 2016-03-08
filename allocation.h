@@ -40,10 +40,10 @@ class Allocation
 		void setFinish(int startTime);
 		int getFinish();
 
-		virtual bool allocate() const = 0;
-		virtual bool deallocate() const = 0;
-		virtual int getFragments() const = 0;
-		virtual int getFreeMem() const = 0;
+		virtual bool allocate() = 0;
+		virtual bool deallocate() = 0;
+		virtual int getFragments() = 0;
+		virtual int getFreeMem() = 0;
 
 		friend class SortByAllocation;
 		friend class SortBySize;

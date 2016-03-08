@@ -15,6 +15,9 @@
 // Global Variable Declarations
 //***************************************************************************************
 
+bool BestFit::memory[MEM_SIZE] = {false};
+int BestFit::amountAllocated = 0;
+
 //***************************************************************************************
 // Constructors and Destructors
 //***************************************************************************************
@@ -32,7 +35,7 @@ bool BestFit::allocate()
 {
 	int pos;
 	int bestPos = -1;
-	int bestFreeSize = MEM_SIZE;
+	int bestFreeSize = MEM_SIZE * 2;
 	int freeSize = 0;
 
 	// loop through memory
@@ -51,6 +54,24 @@ bool BestFit::allocate()
 
 			// increment freeSize
 			freeSize++;	
+
+			if(i == (MEM_SIZE - 1))
+			{
+				// check if free size >= needed size
+				if(freeSize >= allocationSize)
+				{
+					// check if it's better than current best freeSize
+					if((freeSize - allocationSize) < bestFreeSize)
+					{
+						// store new best freeSize
+						bestPos = pos;
+						bestFreeSize = freeSize;
+					}
+				}
+				
+				// set freeSize to 0
+				freeSize = 0;
+			}
 		}
 		// if the memory location is not empty
 		// check if freeSize is > 0

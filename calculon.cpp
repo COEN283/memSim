@@ -9,9 +9,6 @@
 
 ****************************************************************************************/
 
-#include "allocation.h"
-#include "calculon.h"
-
 //***************************************************************************************
 // Global Variable Declarations
 //***************************************************************************************
@@ -63,6 +60,9 @@ void Calculon<A>::incrementTime()
 {
 	time++;	
 
+	int numFailedAllocations = 0;
+	int numFragments = 0;
+
 	vector <A*> allocationHold;
 
 	// Read deallocation Queue
@@ -71,12 +71,12 @@ void Calculon<A>::incrementTime()
 				deallocationQueue.top()->getFinish() <= time )
 	{
 		// deallocate the object
-		//deallocationQueue.top()->deallocate();
+		deallocationQueue.top()->deallocate();
 		
 		delete(deallocationQueue.top());
 
 		deallocationQueue.pop();
-		
+		cout << "hello" << endl;
 	}
 	
 	// Read allocation queue
@@ -85,22 +85,35 @@ void Calculon<A>::incrementTime()
 			 allocationQueue.top()->getStart() <= time )
 	{
 		// if successfully allocated
-		//if( allocationQueue.top()->allocate() )
-		//{
+		if( allocationQueue.top()->allocate() )
+		{
+			allocationQueue.top()->setFinish(time);			
+			
+			numFragments = allocationQueue.top()->getFragments();			
+
 			deallocationQueue.push(allocationQueue.top());
 
 			allocationQueue.pop();
-		//}
-	
+		
+			cout << "bye" << endl;
+		}
+		else
+		{
+			if(allocationQueue.top()->getFreeMem() > 
+					allocationQueue.top()->getSize())
+			{
+				numFailedAllocations++;
+			}
+		}
 	}
 
-	//calculateStats();
+	this->calculateStats(numFailedAllocations, numFragments, time);
 }
 
 
 // Parse file
 template <typename A>
-void Calculon<A>::populateQueue(string filename, allocQ& queue)
+void Calculon<A>::populateQueue(string filename, priority_queue<A*, vector<A*>, SortByAllocation>& queue)
 {
 	char buffer[BUFFER_SIZE];
 
@@ -135,9 +148,15 @@ void Calculon<A>::populateQueue(string filename, allocQ& queue)
 }
 
 template <typename A>
+void Calculon<A>::calculateStats(int numFailedAllocations, int numFragments, int time)
+{
+	outfile << time << ", " << numFragments << ", " << numFailedAllocations << endl;
+}
+
+template <typename A>
 void Calculon<A>::runSimulation()
 {
-	while(!allocationQueue.empty() && !deallocationQueue.empty())
+	while(!allocationQueue.empty() || !deallocationQueue.empty())
 	{
 		incrementTime();
 	}

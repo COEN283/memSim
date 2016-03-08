@@ -20,6 +20,8 @@
 
 using namespace std;
 
+const int MEM_MAX = 4;
+
 //***************************************************************************************
 // Class Definition
 //***************************************************************************************
@@ -43,9 +45,5 @@ class BinaryBuddy : public Allocation
 		int getFreeMem();
 
 };
-
-int BinaryBuddy::mem[MEM_MAX] = {8,4,2,1};
-int BinaryBuddy::numFragments = 0;
-int BinaryBuddy::freeMem = 0;
 
 #endif

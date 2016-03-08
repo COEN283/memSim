@@ -19,7 +19,6 @@
 // Includes
 //***************************************************************************************
 
-#include <string>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -29,15 +28,13 @@
 #include <list>
 #include <vector>
 
+#include "allocation.h"
+
 using namespace std;
 
 //***************************************************************************************
 // Class Definition
 //***************************************************************************************
-
-
-typedef priority_queue<Allocation*, vector<Allocation*> ,SortByAllocation> allocQ;
-typedef priority_queue<Allocation*, vector<Allocation*> ,SortByDeallocation> deallocQ;
 
 template <typename A>
 class Calculon
@@ -47,8 +44,8 @@ class Calculon
 		ofstream outfile;
 
 		// allocation and deallocation queues	
-		allocQ allocationQueue; 
-		deallocQ deallocationQueue;
+		priority_queue<A*, vector<A*>, SortByAllocation> allocationQueue; 
+		priority_queue<A*, vector<A*>, SortByDeallocation> deallocationQueue;
 	
 	public:
 	
@@ -59,11 +56,13 @@ class Calculon
 		// runSimulation
 		void runSimulation();
 		// Read into Queue member function
-		void populateQueue(string filename, allocQ& queue);
+		void populateQueue(string filename, priority_queue<A*, vector<A*>, SortByAllocation>& queue);
 		// Increment time member function
 		void incrementTime();
 		// Count statistics
-		void calculateStats();
+		void calculateStats(int numFailedAllocations, int numFragments, int time);
 };
+
+#include "calculon.cpp"
 
 #endif

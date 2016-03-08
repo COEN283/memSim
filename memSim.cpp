@@ -22,6 +22,14 @@ using namespace std;
 #include "allocation.h"
 #include "calculon.h"
 
+#include "bestFit.h"
+#include "binaryBuddy.h"
+#include "doubleBuddy.h"
+#include "firstFit.h"
+#include "segregated.h"
+#include "simpleSegregated.h"
+#include "worstFit.h"
+
 //***************************************************************************************
 // Prototypes
 //***************************************************************************************
@@ -32,6 +40,11 @@ using namespace std;
 
 int main()
 {
+	//Calculon<FirstFit> firstFit("testfile.csv", "testrandomfile.csv");
+	//firstFit.runSimulation();
+
+	Calculon<BestFit> bestFit("testfile.csv", "testrandomfile.csv");
+	bestFit.runSimulation();
 
 	return 0;
 }

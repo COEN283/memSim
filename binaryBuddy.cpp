@@ -10,13 +10,15 @@
 ****************************************************************************************/
 
 #include <cmath>
+#include "binaryBuddy.h"
 
 //***************************************************************************************
 // Global Variable Declarations
 //***************************************************************************************
-const int MEM_MAX = 4;
 
-#include "binaryBuddy.h"
+int BinaryBuddy::mem[MEM_MAX] = {8,4,2,1};
+int BinaryBuddy::numFragments = 0;
+int BinaryBuddy::freeMem = 0;
 
 //***************************************************************************************
 // Constructors and Destructors

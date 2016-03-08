@@ -13,14 +13,14 @@ SEGREGATED=segregated.cpp segregated.h
 BINARY=binaryBuddy.cpp binaryBuddy.h
 DOUBLE=doubleBuddy.cpp doubleBuddy.h
 
-all: allocation.o calculon.o bestFit.o firstFit.o worstFit.o simple.o segregated.o binary.o double.o
-	$(CPC) $(CFLAGS) memSim.cpp allocation.o calculon.o bestFit.o firstFit.o worstFit.o simple.o segregated.o binary.o double.o -o memSim
+all: allocation.o bestFit.o firstFit.o worstFit.o simple.o segregated.o binary.o double.o
+	$(CPC) $(CFLAGS) memSim.cpp allocation.o calculon.h bestFit.o firstFit.o worstFit.o simple.o segregated.o binary.o double.o -o memSim
 
 allocation.o: $(ALLOCATION)
 	$(CPC) $(CFLAGS) -c allocation.cpp  -o allocation.o 
 
-calculon.o: $(ALLOCATION) $(CALCULON)
-	$(CPC) $(CFLAGS) -c calculon.cpp  -o calculon.o 
+#calculon.o: $(ALLOCATION) $(CALCULON)
+#	$(CPC) $(CFLAGS) -c calculon.cpp calculon.h -o calculon.o 
 
 bestFit.o: $(ALLOCATION) $(BESTFIT)
 	$(CPC) $(CFLAGS) -c bestFit.cpp  -o bestFit.o 

@@ -42,7 +42,4 @@ class WorstFit : public Allocation
         int getFreeMem();
 };
 
-bool WorstFit::memory[MEM_SIZE] = {false};
-int WorstFit::amountAllocated = 0;
-
 #endif

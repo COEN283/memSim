@@ -10,13 +10,15 @@
 ****************************************************************************************/
 
 #include <cmath>
+#include "segregated.h"
 
 //***************************************************************************************
 // Global Variable Declarations
 //***************************************************************************************
-const int MEM_MAX = 4;
 
-#include "segregated.h"
+int Segregated::mem[MEM_MAX_SEG] = {8,4,2,1};
+int Segregated::numFragments = 0;
+int Segregated::freeMem = 0;
 
 //***************************************************************************************
 // Constructors and Destructors
@@ -36,7 +38,7 @@ bool Segregated::allocate()
 {
 	int index = ceil(log2(allocationSize));
 
-	for(int i = index; i < MEM_MAX; i++)
+	for(int i = index; i < MEM_MAX_SEG; i++)
 	{
 		if(mem[i] > 0)
 		{
