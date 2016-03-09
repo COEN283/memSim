@@ -22,13 +22,14 @@ using namespace std;
 #include "allocation.h"
 #include "calculon.h"
 
+#include "firstFit.h"
+#include "nextFit.h"
 #include "bestFit.h"
+#include "worstFit.h"
 #include "binaryBuddy.h"
 #include "doubleBuddy.h"
-#include "firstFit.h"
 #include "segregated.h"
 #include "simpleSegregated.h"
-#include "worstFit.h"
 
 //***************************************************************************************
 // Prototypes
@@ -42,9 +43,27 @@ int main()
 {
 	//Calculon<FirstFit> firstFit("testfile.csv", "testrandomfile.csv");
 	//firstFit.runSimulation();
-
-	Calculon<BestFit> bestFit("testfile.csv", "testrandomfile.csv");
-	bestFit.runSimulation();
+	
+	//Calculon<NextFit> nextFit("testfile.csv", "testrandomfile.csv");
+	//nextFit.runSimulation();
+	
+	//Calculon<BestFit> bestFit("testfile.csv", "testrandomfile.csv");
+	//bestFit.runSimulation();
+	
+	//Calculon<WorstFit> worstFit("testfile.csv", "testrandomfile.csv");
+	//worstFit.runSimulation();
+	
+	//Calculon<SimpleSegregated> simple("testfile.csv", "testrandomfile.csv");
+	//simple.runSimulation();
+	
+	//Calculon<Segregated> segregated("testfile.csv", "testrandomfile.csv");
+	//segregated.runSimulation();
+	
+	//Calculon<BinaryBuddy> binary("testfile.csv", "testrandomfile.csv");
+	//binary.runSimulation();
+	
+	//Calculon<DoubleBuddy> doubleBuddy("testfile.csv", "testrandomfile.csv");
+	//doubleBuddy.runSimulation();
 
 	return 0;
 }

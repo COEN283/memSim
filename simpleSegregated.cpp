@@ -17,7 +17,7 @@
 // Global Variable Declarations
 //***************************************************************************************
 
-int SimpleSegregated::mem[MEM_MAX] = {8,4,2,1};
+int SimpleSegregated::mem[MEM_MAX_SIM] = {8,0,6,0,4,0,2,0,1};
 int SimpleSegregated::numFragments = 0;
 int SimpleSegregated::freeMem = 0;
 
@@ -39,22 +39,21 @@ bool SimpleSegregated::allocate()
 {
 	int index = ceil(log2(allocationSize));
 
-	if(!(index % CLASS_SIZE))
-		index += (CLASS_SIZE - (index % CLASS_SIZE));
-
-	for(int i = index; i < MEM_MAX; i += CLASS_SIZE)
+	if(index % CLASS_SIZE)
 	{
-		if(mem[i] > 0)
-		{
-			memIndex = i;
-			mem[i]--;
-			freeSpace = pow(2.0, static_cast<double>(i)) - allocationSize;
-			if(!freeSpace)
-				numFragments++;
-	
-			freeMem -= allocationSize;
-			return true;
-		}
+		index += (CLASS_SIZE - (index % CLASS_SIZE));
+	}
+
+	if(mem[index] > 0)
+	{
+		memIndex = index;
+		mem[index]--;
+		freeSpace = pow(2.0, static_cast<double>(index)) - allocationSize;
+		if(!freeSpace)
+			numFragments++;
+
+		freeMem -= allocationSize;
+		return true;
 	}
 
 	return false;

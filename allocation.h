@@ -55,7 +55,7 @@ class SortByAllocation
 	public:
 		bool operator()(const Allocation* lhs, const Allocation* rhs)
 		{
-			return lhs->allocationTime < rhs->allocationTime;
+			return lhs->allocationTime > rhs->allocationTime;
 		} 
 };
 
@@ -64,7 +64,7 @@ class SortBySize
 	public:
 		bool operator()(const Allocation* lhs, const Allocation* rhs)
 		{
-			return lhs->allocationSize < rhs->allocationSize;
+			return lhs->allocationSize > rhs->allocationSize;
 		}
 		
 };
@@ -74,7 +74,7 @@ class SortByDeallocation
 	public:
 		bool operator()(const Allocation* lhs, const Allocation* rhs)
 		{
-			return lhs->deallocationTime < rhs->deallocationTime;
+			return lhs->deallocationTime > rhs->deallocationTime;
 		}
 };
 

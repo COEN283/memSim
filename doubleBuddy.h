@@ -12,8 +12,8 @@
 
 ****************************************************************************************/
 
-#ifndef BINARYBUDDY_H
-#define BINARYBUDDY_H
+#ifndef DOUBLEBUDDY_H
+#define DOUBLEBUDDY_H
 
 #include <iostream>
 #include "allocation.h"
@@ -24,13 +24,13 @@ using namespace std;
 // Class Definition
 //***************************************************************************************
 
-const int MEM_MAX = 4;
+const int MEM_MAX_DBL = 4;
 
 class DoubleBuddy : public Allocation 
 {
 	private:
-		static int memRight[MEM_MAX];
-		static int memLeft[MEM_MAX];
+		static int memRight[MEM_MAX_DBL];
+		static int memLeft[MEM_MAX_DBL];
 		static int numFragments;
 		static int freeMem;
 		static double rightBase;

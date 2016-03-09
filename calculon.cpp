@@ -64,6 +64,8 @@ void Calculon<A>::incrementTime()
 	int numFragments = 0;
 
 	vector <A*> allocationHold;
+    
+    cout << "iteration " << time << endl;
 
 	// Read deallocation Queue
 	// deallocate what isn't needed anymore
@@ -73,10 +75,10 @@ void Calculon<A>::incrementTime()
 		// deallocate the object
 		deallocationQueue.top()->deallocate();
 		
+        cout << "bye " << deallocationQueue.top()->getFinish() << endl;
 		delete(deallocationQueue.top());
 
 		deallocationQueue.pop();
-		cout << "hello" << endl;
 	}
 	
 	// Read allocation queue
@@ -88,14 +90,14 @@ void Calculon<A>::incrementTime()
 		if( allocationQueue.top()->allocate() )
 		{
 			allocationQueue.top()->setFinish(time);			
+            
+            cout << "hello " << allocationQueue.top()->getStart() << endl;
 			
 			numFragments = allocationQueue.top()->getFragments();			
 
 			deallocationQueue.push(allocationQueue.top());
 
 			allocationQueue.pop();
-		
-			cout << "bye" << endl;
 		}
 		else
 		{
@@ -104,8 +106,19 @@ void Calculon<A>::incrementTime()
 			{
 				numFailedAllocations++;
 			}
+
+            allocationHold.push_back(allocationQueue.top());
+
+            cout << "hi " << allocationQueue.top()->getSize() << endl;
+            allocationQueue.pop();
 		}
 	}
+
+    while(!allocationHold.empty())
+    {
+        allocationQueue.push(allocationHold.back());
+        allocationHold.pop_back();
+    }
 
 	this->calculateStats(numFailedAllocations, numFragments, time);
 }

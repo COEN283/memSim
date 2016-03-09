@@ -16,8 +16,8 @@
 // Global Variable Declarations
 //***************************************************************************************
 
-int DoubleBuddy::memRight[MEM_MAX] = {8,4,2,1};
-int DoubleBuddy::memLeft[MEM_MAX] = {8,4,2,1};
+int DoubleBuddy::memRight[MEM_MAX_DBL] = {8,4,2,1};
+int DoubleBuddy::memLeft[MEM_MAX_DBL] = {8,4,2,1};
 int DoubleBuddy::numFragments = 0;
 int DoubleBuddy::freeMem = 0;
 double DoubleBuddy::rightBase = 2.0;
@@ -42,11 +42,11 @@ bool DoubleBuddy::allocate()
 	int rightIndex = ceil(log2(allocationSize) / log2(rightBase));
 	int leftIndex = ceil(log2(allocationSize) / log2(leftBase));
 
-	for(; rightIndex < MEM_MAX; rightIndex++)
+	for(; rightIndex < MEM_MAX_DBL; rightIndex++)
 		if(memRight[rightIndex] > 0)
 			break;
 
-	for(; leftIndex < MEM_MAX; leftIndex++)
+	for(; leftIndex < MEM_MAX_DBL; leftIndex++)
 		if(memLeft[leftIndex] > 0)
 			break;
 	
@@ -55,16 +55,16 @@ bool DoubleBuddy::allocate()
 	else
 		rightTree = false;
 
-	if(rightTree && rightIndex == MEM_MAX)
+	if(rightTree && rightIndex == MEM_MAX_DBL)
 		return false;
 
-	if(!rightTree && leftIndex == MEM_MAX)
+	if(!rightTree && leftIndex == MEM_MAX_DBL)
 		return false;
 
 
 	if(rightTree)
 	{
-        for(int j = rightIndex + 1; j < MEM_MAX; j++)
+        for(int j = rightIndex + 1; j < MEM_MAX_DBL; j++)
             memRight[j]--;
 
         for(int j = rightIndex; j > 0; j--)
@@ -76,7 +76,7 @@ bool DoubleBuddy::allocate()
 	}
 	else
 	{
-		for(int j = leftIndex + 1; j < MEM_MAX; j++)
+		for(int j = leftIndex + 1; j < MEM_MAX_DBL; j++)
 			memLeft[j]--;
 		
 		for(int j = leftIndex; j > 0; j--)
@@ -97,7 +97,7 @@ bool DoubleBuddy::allocate()
 
 bool DoubleBuddy::deallocate()
 {
-	for(int j = memIndex + 1; j < MEM_MAX; j++)
+	for(int j = memIndex + 1; j < MEM_MAX_DBL; j++)
 	{
 		if(rightTree)
 		{

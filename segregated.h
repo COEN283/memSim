@@ -12,8 +12,8 @@
 
 ****************************************************************************************/
 
-#ifndef SIMPLESEGREGATED_H
-#define SIMPLESEGREGATED_H
+#ifndef SEGREGATED_H
+#define SEGREGATED_H
 
 #include <iostream>
 #include "allocation.h"

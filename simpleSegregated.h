@@ -25,12 +25,12 @@ using namespace std;
 //***************************************************************************************
 
 const int CLASS_SIZE = 2;
-const int MEM_MAX = 4;
+const int MEM_MAX_SIM = 9;
 
 class SimpleSegregated : public Allocation 
 {
 	private:
-		static int mem[MEM_MAX];
+		static int mem[MEM_MAX_SIM];
 		static int numFragments;
 		static int freeMem;
 

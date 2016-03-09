@@ -35,7 +35,7 @@ bool WorstFit::allocate()
 {
 	int pos;
 	int worstPos = -1;
-	int worstFreeSize = MEM_SIZE;
+	int worstFreeSize = -1;
 	int freeSize = 0;
 
 	// loop through memory
@@ -54,7 +54,26 @@ bool WorstFit::allocate()
 
 			// increment freeSize
 			freeSize++;	
-		}
+
+			if(i == (MEM_SIZE - 1))
+			{
+				// check if free size >= needed size
+				if(freeSize >= allocationSize)
+				{
+					// check if it's better than current worst freeSize
+					if((freeSize - allocationSize) > worstFreeSize)
+					{
+						// store new worst freeSize
+						worstPos = pos;
+						worstFreeSize = freeSize;
+					}
+				}
+				
+				// set freeSize to 0
+				freeSize = 0;
+			}
+		}		
+
 		// if the memory location is not empty
 		// check if freeSize is > 0
 		// if freeSize > 0, then end of free block
