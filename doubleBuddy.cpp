@@ -15,10 +15,11 @@
 //***************************************************************************************
 // Global Variable Declarations
 //***************************************************************************************
-//                                        0  1  2  3  4  5  6  7  8  9 
-int DoubleBuddy::memRight[MEM_MAX_DBL] = {6, 5, 4, 4, 4, 2, 1, 0, 0, 0};
-//                                       0  1  2  3  4  5  6  7  8  9 
-int DoubleBuddy::memLeft[MEM_MAX_DBL] = {7, 8, 7, 6, 0, 0, 0, 0, 0, 0};
+//                                         0    1    2   3   4  5  6  7  8  9
+int DoubleBuddy::memRight[MEM_MAX_DBL] = {265, 128, 64, 32, 16, 8, 4, 2, 1, 0};
+//                                        0    1   2  3  4  5  6  7  8  9
+int DoubleBuddy::memLeft[MEM_MAX_DBL] = {243, 81, 27, 9, 3, 1, 0, 0, 0, 0};
+									//	{265, 85, 29, 9, 3, 1, 0, 0, 0, 0};
 int DoubleBuddy::numFragments = 0;
 int DoubleBuddy::freeMem = MEM_SIZE;
 double DoubleBuddy::rightBase = 2.0;
