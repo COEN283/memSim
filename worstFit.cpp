@@ -103,9 +103,9 @@ bool WorstFit::allocate()
 		memPos = worstPos;
 
 		// mark memory as occupied
-		for(int i = worstPos; i < allocationSize; i++)
+		for(int i = 0; i < allocationSize; i++)
 		{
-			memory[i] = true;
+			memory[worstPos + i] = true;
 		}
 
 		amountAllocated += allocationSize;
@@ -122,8 +122,8 @@ bool WorstFit::allocate()
 
 bool WorstFit::deallocate()
 {
-	for(int i = memPos; i < allocationSize; i++)
-		memory[i] = false;
+	for(int i = 0; i < allocationSize; i++)
+		memory[memPos + i] = false;
 
 	amountAllocated -= allocationSize;
 

@@ -102,9 +102,9 @@ bool BestFit::allocate()
 		memPos = bestPos;
 
 		// mark memory as occupied
-		for(int i = bestPos; i < allocationSize; i++)
+		for(int i = 0; i < allocationSize; i++)
 		{
-			memory[i] = true;
+			memory[bestPos + i] = true;
 		}
 
 		amountAllocated += allocationSize;
@@ -121,8 +121,8 @@ bool BestFit::allocate()
 
 bool BestFit::deallocate()
 {
-	for(int i = memPos; i < allocationSize; i++)
-		memory[i] = false;
+	for(int i = 0; i < allocationSize; i++)
+		memory[memPos + i] = false;
 
 	amountAllocated -= allocationSize;
 

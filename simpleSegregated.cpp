@@ -16,10 +16,10 @@
 //***************************************************************************************
 // Global Variable Declarations
 //***************************************************************************************
-
-int SimpleSegregated::mem[MEM_MAX_SIM] = {8,0,6,0,4,0,2,0,1};
+//                                        0  1  2  3  4  5  6  7  8  9 
+int SimpleSegregated::mem[MEM_MAX_SIM] = {8, 0, 6, 0, 6, 0, 6, 0, 0, 0};
 int SimpleSegregated::numFragments = 0;
-int SimpleSegregated::freeMem = 0;
+int SimpleSegregated::freeMem = MEM_SIZE;
 
 //***************************************************************************************
 // Constructors and Destructors
@@ -48,8 +48,10 @@ bool SimpleSegregated::allocate()
 	{
 		memIndex = index;
 		mem[index]--;
+
 		freeSpace = pow(2.0, static_cast<double>(index)) - allocationSize;
-		if(!freeSpace)
+
+		if(freeSpace)
 			numFragments++;
 
 		freeMem -= allocationSize;
@@ -63,7 +65,7 @@ bool SimpleSegregated::deallocate()
 {
 	mem[memIndex]++;
 
-	if(!freeSpace)
+	if(freeSpace)
 		numFragments--;
 
 	freeMem += allocationSize;

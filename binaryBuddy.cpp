@@ -16,9 +16,10 @@
 // Global Variable Declarations
 //***************************************************************************************
 
-int BinaryBuddy::mem[MEM_MAX] = {8,4,2,1};
+//                               0  1  2  3  4  5  6  7  8  9 
+int BinaryBuddy::mem[MEM_MAX] = {6, 5, 4, 4, 14, 14, 14, 0, 0, 0};
 int BinaryBuddy::numFragments = 0;
-int BinaryBuddy::freeMem = 0;
+int BinaryBuddy::freeMem = MEM_SIZE;
 
 //***************************************************************************************
 // Constructors and Destructors
@@ -51,7 +52,8 @@ bool BinaryBuddy::allocate()
                 mem[j] -= pow(2.0, i - j);
 
 			freeSpace = pow(2.0, static_cast<double>(i)) - allocationSize;
-			if(!freeSpace)
+
+			if(freeSpace)
 				numFragments++;
 	
 			freeMem -= allocationSize;
@@ -70,7 +72,7 @@ bool BinaryBuddy::deallocate()
     for(int j = memIndex; j > 0; j--)
         mem[j] += pow(2.0, memIndex - j);
 
-	if(!freeSpace)
+	if(freeSpace)
 		numFragments--;
 
 	freeMem += allocationSize;

@@ -13,7 +13,6 @@
 // Global Variable Declarations
 //***************************************************************************************
 const char DELIMITERS[] = " ,";
-const string FILENAME = "stats.txt";
 const int BUFFER_SIZE = 30;
 
 //***************************************************************************************
@@ -21,15 +20,21 @@ const int BUFFER_SIZE = 30;
 //***************************************************************************************
 
 template <typename A>
-Calculon<A>::Calculon(string allocationFile, string randomAllocationFile)
+Calculon<A>::Calculon(string allocationFile, string randomAllocationFile, string output)
 {
 	// Setup output writer for Stats
-	outfile.open(FILENAME.c_str()); 
+	outfile.open(output.c_str()); 
+
+	// Print out header
+	outfile << "time" << ", " << "numFragments" << ", " << "numFailedAllocations" 
+			<< ", " << "numAllocations" << ", " << "numDeallocations" << ", " 
+			<< "freeMem" << endl;
+
 	
 	// check for successful open
 	if(!outfile)
 	{
-		cerr << "Error in opening output file: " << FILENAME << endl;
+		cerr << "Error in opening output file: " << output << endl;
 		exit(1);
 	}
 	
@@ -62,10 +67,11 @@ void Calculon<A>::incrementTime()
 
 	int numFailedAllocations = 0;
 	int numFragments = 0;
+	int numAllocations = 0;
+	int numDeallocations = 0;
+	int freeMem = 0;
 
 	vector <A*> allocationHold;
-    
-    cout << "iteration " << time << endl;
 
 	// Read deallocation Queue
 	// deallocate what isn't needed anymore
@@ -75,10 +81,11 @@ void Calculon<A>::incrementTime()
 		// deallocate the object
 		deallocationQueue.top()->deallocate();
 		
-        cout << "bye " << deallocationQueue.top()->getFinish() << endl;
 		delete(deallocationQueue.top());
 
 		deallocationQueue.pop();
+
+		numDeallocations++;
 	}
 	
 	// Read allocation queue
@@ -91,13 +98,11 @@ void Calculon<A>::incrementTime()
 		{
 			allocationQueue.top()->setFinish(time);			
             
-            cout << "hello " << allocationQueue.top()->getStart() << endl;
-			
-			numFragments = allocationQueue.top()->getFragments();			
-
 			deallocationQueue.push(allocationQueue.top());
 
 			allocationQueue.pop();
+
+			numAllocations++;
 		}
 		else
 		{
@@ -109,7 +114,6 @@ void Calculon<A>::incrementTime()
 
             allocationHold.push_back(allocationQueue.top());
 
-            cout << "hi " << allocationQueue.top()->getSize() << endl;
             allocationQueue.pop();
 		}
 	}
@@ -120,7 +124,14 @@ void Calculon<A>::incrementTime()
         allocationHold.pop_back();
     }
 
-	this->calculateStats(numFailedAllocations, numFragments, time);
+	if(!allocationQueue.empty())
+	{
+		numFragments = allocationQueue.top()->getFragments();			
+		freeMem = allocationQueue.top()->getFreeMem();			
+	}
+
+	this->calculateStats(numFailedAllocations, numFragments,
+			numAllocations, numDeallocations, freeMem, time);
 }
 
 
@@ -140,7 +151,7 @@ void Calculon<A>::populateQueue(string filename, priority_queue<A*, vector<A*>, 
 	// check for successful open
 	if(!infile)
 	{
-		cerr << "Error in opening input file: " << FILENAME << endl;
+		cerr << "Error in opening input file: " << filename << endl;
 		exit(1);
 	}
 	
@@ -161,9 +172,10 @@ void Calculon<A>::populateQueue(string filename, priority_queue<A*, vector<A*>, 
 }
 
 template <typename A>
-void Calculon<A>::calculateStats(int numFailedAllocations, int numFragments, int time)
+void Calculon<A>::calculateStats(int numFailedAllocations, int numFragments, int numAllocations, int numDeallocations, int freeMem, int time)
 {
-	outfile << time << ", " << numFragments << ", " << numFailedAllocations << endl;
+	outfile << time << ", " << numFragments << ", " << numFailedAllocations 
+		<< ", " << numAllocations << ", " << numDeallocations << ", " << freeMem << endl;
 }
 
 template <typename A>

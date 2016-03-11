@@ -41,11 +41,11 @@ bool NextFit::allocate()
 		if(count >= allocationSize)
 		{
 			//update memory location
-			memLoc = currIndex - count;
+			memLoc = currIndex - count + 1;
 
 			//update memArr, mark occupied indexes as 1
-			for(int j = memLoc; j <= allocationSize; j++)
-				memArr[j] = 1;
+			for(int j = 0; j < allocationSize; j++)
+				memArr[memLoc + j] = 1;
 
 			//update allocatedMem
 			allocatedMem += allocationSize;
@@ -66,13 +66,15 @@ bool NextFit::allocate()
 bool NextFit::deallocate()
 {
 	//starting at the memory location of the allocation object
-	for(int i = memLoc; i <= allocationSize; i++)
+	for(int i = 0; i < allocationSize; i++)
 	{
 		//indicate empty memory by setting memory slots to 0
-		memArr[i] = 0;
+		memArr[memLoc + i] = 0;
 
 	}//ends for loop
 
+	allocatedMem -= allocationSize;
+	
 	return true;
 
 }//ends deallocate()

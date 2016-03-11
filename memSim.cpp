@@ -19,6 +19,8 @@ using namespace std;
 //***************************************************************************************
 // Classes
 //***************************************************************************************
+#include <string>
+
 #include "allocation.h"
 #include "calculon.h"
 
@@ -31,6 +33,8 @@ using namespace std;
 #include "segregated.h"
 #include "simpleSegregated.h"
 
+using namespace std;
+
 //***************************************************************************************
 // Prototypes
 //***************************************************************************************
@@ -41,29 +45,32 @@ using namespace std;
 
 int main()
 {
-	//Calculon<FirstFit> firstFit("testfile.csv", "testrandomfile.csv");
-	//firstFit.runSimulation();
+	string testfile = "testfile.csv";
+	string random = "random.csv";
+
+	Calculon<FirstFit> firstFit(testfile, random, "first_fit_stats.csv");
+	firstFit.runSimulation();
+  
+	Calculon<NextFit> nextFit(testfile, random, "next_fit_stats.csv");
+	nextFit.runSimulation();
+  
+	Calculon<BestFit> bestFit(testfile, random, "best_fit_stats.csv");
+	bestFit.runSimulation();
+  
+	Calculon<WorstFit> worstFit(testfile, random, "worst_fit_stats.csv");
+	worstFit.runSimulation();
+  
+	Calculon<SimpleSegregated> simple(testfile, random, "simple_seg_stats.csv");
+	simple.runSimulation();
+  
+	Calculon<Segregated> segregated(testfile, random, "segregated_stats.csv");
+	segregated.runSimulation();
+  
+	Calculon<BinaryBuddy> binary(testfile, random, "binary_buddy_stats.csv");
+	binary.runSimulation();
 	
-	//Calculon<NextFit> nextFit("testfile.csv", "testrandomfile.csv");
-	//nextFit.runSimulation();
-	
-	//Calculon<BestFit> bestFit("testfile.csv", "testrandomfile.csv");
-	//bestFit.runSimulation();
-	
-	//Calculon<WorstFit> worstFit("testfile.csv", "testrandomfile.csv");
-	//worstFit.runSimulation();
-	
-	//Calculon<SimpleSegregated> simple("testfile.csv", "testrandomfile.csv");
-	//simple.runSimulation();
-	
-	//Calculon<Segregated> segregated("testfile.csv", "testrandomfile.csv");
-	//segregated.runSimulation();
-	
-	//Calculon<BinaryBuddy> binary("testfile.csv", "testrandomfile.csv");
-	//binary.runSimulation();
-	
-	//Calculon<DoubleBuddy> doubleBuddy("testfile.csv", "testrandomfile.csv");
-	//doubleBuddy.runSimulation();
+	Calculon<DoubleBuddy> doubleBuddy(testfile, random, "double_buddy_stats.csv");
+	doubleBuddy.runSimulation();
 
 	return 0;
 }

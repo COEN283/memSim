@@ -25,7 +25,7 @@ using namespace std;
 //***************************************************************************************
 
 const int CLASS_SIZE = 2;
-const int MEM_MAX_SIM = 9;
+const int MEM_MAX_SIM = 10;
 
 class SimpleSegregated : public Allocation 
 {

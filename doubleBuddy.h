@@ -24,7 +24,7 @@ using namespace std;
 // Class Definition
 //***************************************************************************************
 
-const int MEM_MAX_DBL = 4;
+const int MEM_MAX_DBL = 10;
 
 class DoubleBuddy : public Allocation 
 {

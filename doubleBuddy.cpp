@@ -15,11 +15,12 @@
 //***************************************************************************************
 // Global Variable Declarations
 //***************************************************************************************
-
-int DoubleBuddy::memRight[MEM_MAX_DBL] = {8,4,2,1};
-int DoubleBuddy::memLeft[MEM_MAX_DBL] = {8,4,2,1};
+//                                        0  1  2  3  4  5  6  7  8  9 
+int DoubleBuddy::memRight[MEM_MAX_DBL] = {6, 5, 4, 4, 4, 2, 1, 0, 0, 0};
+//                                       0  1  2  3  4  5  6  7  8  9 
+int DoubleBuddy::memLeft[MEM_MAX_DBL] = {7, 8, 7, 6, 0, 0, 0, 0, 0, 0};
 int DoubleBuddy::numFragments = 0;
-int DoubleBuddy::freeMem = 0;
+int DoubleBuddy::freeMem = MEM_SIZE;
 double DoubleBuddy::rightBase = 2.0;
 double DoubleBuddy::leftBase = 3.0;
 
@@ -55,10 +56,10 @@ bool DoubleBuddy::allocate()
 	else
 		rightTree = false;
 
-	if(rightTree && rightIndex == MEM_MAX_DBL)
+	if(rightTree && rightIndex >= MEM_MAX_DBL)
 		return false;
 
-	if(!rightTree && leftIndex == MEM_MAX_DBL)
+	if(!rightTree && leftIndex >= MEM_MAX_DBL)
 		return false;
 
 
@@ -87,7 +88,7 @@ bool DoubleBuddy::allocate()
 		freeSpace = pow(leftBase, static_cast<double>(leftIndex)) - allocationSize;
 	}
 
-	if(!freeSpace)
+	if(freeSpace)
 		numFragments++;
 	
 	freeMem -= allocationSize;
@@ -121,7 +122,7 @@ bool DoubleBuddy::deallocate()
 		}
 	}
 
-	if(!freeSpace)
+	if(freeSpace)
 		numFragments--;
 	
 	freeMem += allocationSize;

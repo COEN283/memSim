@@ -50,7 +50,7 @@ class Calculon
 	public:
 	
 		// Calculon Constructor / Destructor
-		Calculon(string allocationFile, string randomAllocationFile);
+		Calculon(string allocationFile, string randomAllocationFile, string output);
 		~Calculon();
 	
 		// runSimulation
@@ -60,7 +60,7 @@ class Calculon
 		// Increment time member function
 		void incrementTime();
 		// Count statistics
-		void calculateStats(int numFailedAllocations, int numFragments, int time);
+		void calculateStats(int numFailedAllocations, int numFragments, int numAllocations, int numDeallocations, int freeMem, int time);
 };
 
 #include "calculon.cpp"

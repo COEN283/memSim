@@ -15,10 +15,10 @@
 //***************************************************************************************
 // Global Variable Declarations
 //***************************************************************************************
-
-int Segregated::mem[MEM_MAX_SEG] = {8,4,2,1};
+//                                  0  1  2  3  4  5  6  7  8  9 
+int Segregated::mem[MEM_MAX_SEG] = {6, 5, 4, 4, 4, 4, 4, 0, 0, 0};
 int Segregated::numFragments = 0;
-int Segregated::freeMem = 0;
+int Segregated::freeMem = MEM_SIZE;
 
 //***************************************************************************************
 // Constructors and Destructors
@@ -44,8 +44,10 @@ bool Segregated::allocate()
 		{
 			memIndex = i;
 			mem[i]--;
+
 			freeSpace = pow(2.0, static_cast<double>(i)) - allocationSize;
-			if(!freeSpace)
+
+			if(freeSpace)
 				numFragments++;
 	
 			freeMem -= allocationSize;
@@ -60,7 +62,7 @@ bool Segregated::deallocate()
 {
 	mem[memIndex]++;
 
-	if(!freeSpace)
+	if(freeSpace)
 		numFragments--;
 
 	freeMem += allocationSize;

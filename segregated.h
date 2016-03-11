@@ -20,7 +20,7 @@
 
 using namespace std;
 
-const int MEM_MAX_SEG = 4;
+const int MEM_MAX_SEG = 10;
 
 //***************************************************************************************
 // Class Definition
