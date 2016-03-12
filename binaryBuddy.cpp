@@ -17,7 +17,7 @@
 //***************************************************************************************
 
 //                                0    1    2    3   4   5  6  7  8  9
-int BinaryBuddy::mem[MEM_MAX] = {512, 265, 128, 64, 32, 16, 8, 4, 2, 1};
+int BinaryBuddy::mem[MEM_MAX] = {512, 256, 128, 64, 32, 16, 8, 4, 2, 1};
 int BinaryBuddy::numFragments = 0;
 int BinaryBuddy::freeMem = MEM_SIZE;
 
