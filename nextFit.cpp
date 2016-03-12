@@ -54,6 +54,10 @@ bool NextFit::allocate()
 		}
 
     currIndex++;
+	
+	if(currIndex >= MEM_SIZE)
+		count = 0;
+
     currIndex %= MEM_SIZE;
 
 	}//ends for loop
