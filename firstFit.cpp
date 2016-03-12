@@ -81,7 +81,7 @@ int FirstFit::getFragments()
 	int count = 0;
 
 	//loop through memory
-	for(int i = 0; i < allocationSize; i++)
+	for(int i = 0; i < MEM_SIZE; i++)
 	{
 		//if memory slot is empty and index is 0
 		if(memArr[i] == 0 && i == 0)
